@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Em Breve - FazEncarte.com</title>
+  <meta name="description" content="O FazEncarte.com est&#225; chegando! Em breve voc&#234; poder&#225; criar encartes profissionais em minutos.">
+
+  <!-- Google Fonts - Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script defer src="https://www.fazencarte.com/umami/script.js" data-website-id="f49ada6f-8315-491a-bfe8-844261e4f1ae"></script>
+
+  <style>
+    :root {
+      --primary-orange: #FF6B35;
+      --primary-red: #E8363A;
+      --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #E8363A 100%);
+      --gradient-hero: linear-gradient(135deg, #FF8C42 0%, #E8363A 100%);
+      --text-dark: #1a1a2e;
+      --text-muted: #8E8EA0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--gradient-hero);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ---------- BACKGROUND ANIMATED SHAPES ---------- */
+    .bg-shapes {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg-shapes .shape {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      animation: floatShape 20s infinite ease-in-out;
+    }
+
+    .shape-1 { width: 400px; height: 400px; top: -10%; left: -5%; animation-delay: 0s; }
+    .shape-2 { width: 300px; height: 300px; bottom: -8%; right: -5%; animation-delay: -5s; animation-duration: 25s; }
+    .shape-3 { width: 200px; height: 200px; top: 50%; left: 60%; animation-delay: -10s; animation-duration: 18s; }
+    .shape-4 { width: 150px; height: 150px; top: 20%; right: 15%; animation-delay: -3s; animation-duration: 22s; }
+    .shape-5 { width: 100px; height: 100px; bottom: 25%; left: 20%; animation-delay: -7s; animation-duration: 16s; }
+
+    @keyframes floatShape {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -40px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(15px, 30px) scale(1.03); }
+    }
+
+    /* ---------- PARTICLES ---------- */
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* ---------- MAIN CONTENT ---------- */
+    .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px 24px;
+      max-width: 600px;
+    }
+
+    /* ---------- LOGO ---------- */
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 48px;
+      animation: fadeSlideDown 0.8s ease-out both;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      color: white;
+      font-weight: 800;
+      font-size: 0.9rem;
+      border-radius: 10px;
+    }
+
+    .logo-text {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* ---------- ROCKET ICON ---------- */
+    .rocket-wrapper {
+      margin-bottom: 32px;
+      animation: fadeSlideUp 0.8s 0.2s ease-out both;
+    }
+
+    .rocket {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      font-size: 2.8rem;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .rocket i {
+      color: #fff;
+      transform: rotate(-45deg);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2); }
+      50% { transform: scale(1.05); box-shadow: 0 0 40px 10px rgba(255, 255, 255, 0.1); }
+    }
+
+    /* ---------- TEXT ---------- */
+    h1 {
+      color: #fff;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      animation: fadeSlideUp 0.8s 0.4s ease-out both;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.15rem;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      animation: fadeSlideUp 0.8s 0.6s ease-out both;
+    }
+
+    /* ---------- COUNTDOWN ---------- */
+    .countdown-label {
+      display: inline-block;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      animation: fadeSlideUp 0.8s 0.7s ease-out both;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 48px;
+      animation: fadeSlideUp 0.8s 0.8s ease-out both;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 16px 12px;
+      min-width: 80px;
+      transition: transform 0.3s ease;
+    }
+
+    .countdown-item:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .countdown-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .countdown-unit {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ---------- NOTIFY FORM ---------- */
+    .notify-form {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      animation: fadeSlideUp 0.8s 1s ease-out both;
+    }
+
+    .notify-form input {
+      padding: 14px 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      width: 280px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .notify-form input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .notify-form input:focus {
+      border-color: #fff;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .notify-form button {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--primary-red);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .notify-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .notify-form button:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* ---------- BACK LINK ---------- */
+    .back-link {
+      animation: fadeSlideUp 0.8s 1.1s ease-out both;
+    }
+
+    .back-link a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .back-link a:hover {
+      color: #fff;
+    }
+
+    /* ---------- ANIMATIONS ---------- */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- SWAL CUSTOM ---------- */
+    .swal-title-custom {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.6rem !important;
+      font-weight: 800 !important;
+      color: #1a1a2e !important;
+    }
+
+    .swal-btn-custom {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 1.05rem !important;
+      font-weight: 700 !important;
+      padding: 14px 36px !important;
+      border-radius: 10px !important;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 576px) {
+      h1 { font-size: 2.2rem; }
+      .subtitle { font-size: 1rem; }
+      .countdown { gap: 10px; }
+      .countdown-item { min-width: 65px; padding: 12px 8px; }
+      .countdown-value { font-size: 1.5rem; }
+      .notify-form input { width: 100%; }
+      .notify-form { flex-direction: column; align-items: center; }
+      .notify-form button { width: 100%; max-width: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated background shapes -->
+  <div class="bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+    <div class="shape shape-5"></div>
+  </div>
+
+  <!-- Floating particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Main content -->
+  <div class="content">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">FE</span>
+      <span class="logo-text">FazEncarte.com</span>
+    </a>
+
+    <div class="rocket-wrapper">
+      <div class="rocket">
+        <i class="bi bi-rocket-takeoff-fill"></i>
+      </div>
+    </div>
+
+    <h1>Em Breve!</h1>
+    <p class="subtitle">
+      Estamos preparando algo incrivel para voce.<br>
+      O FazEncarte.com esta quase pronto para decolar!
+    </p>
+
+    <span class="countdown-label">Falta pouco para o lancamento</span>
+    <div class="countdown">
+      <div class="countdown-item">
+        <span class="countdown-value" id="days">00</span>
+        <span class="countdown-unit">Dias</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-value" id="hours">00</span>
+        <span class="countdown-unit">Horas</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-value" id="minutes">00</span>
+        <span class="countdown-unit">Min</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-value" id="seconds">00</span>
+        <span class="countdown-unit">Seg</span>
+      </div>
+    </div>
+
+    <form class="notify-form" onsubmit="return handleNotify(event)">
+      <input type="email" placeholder="Seu melhor e-mail" required>
+      <button type="submit">Me Avise!</button>
+    </form>
+
+    <div class="back-link">
+      <a href="index.html">
+        <i class="bi bi-arrow-left"></i> Voltar ao site
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // ---------- COUNTDOWN ----------
+    // Launch date: 01/03/2026
+    (function () {
+      var launchDate = new Date('2026-03-01T00:00:00');
+
+      function updateCountdown() {
+        var now = new Date().getTime();
+        var diff = launchDate.getTime() - now;
+
+        if (diff <= 0) {
+          document.getElementById('days').textContent = '00';
+          document.getElementById('hours').textContent = '00';
+          document.getElementById('minutes').textContent = '00';
+          document.getElementById('seconds').textContent = '00';
+          return;
+        }
+
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+
+    // ---------- PARTICLES ----------
+    (function () {
+      var container = document.getElementById('particles');
+      for (var i = 0; i < 30; i++) {
+        var p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.width = p.style.height = (Math.random() * 4 + 2) + 'px';
+        p.style.animationDuration = (Math.random() * 10 + 8) + 's';
+        p.style.animationDelay = (Math.random() * 10) + 's';
+        container.appendChild(p);
+      }
+    })();
+
+    // ---------- NOTIFY HANDLER (Umami tracking) ----------
+    function handleNotify(e) {
+      e.preventDefault();
+      var input = e.target.querySelector('input');
+      var btn = e.target.querySelector('button');
+      var email = input.value;
+
+      // Track event via Umami
+      if (typeof umami !== 'undefined') {
+        umami.track('notify-me', { email: email });
+      }
+
+      input.value = '';
+
+      // SweetAlert chamativo
+      Swal.fire({
+        icon: 'success',
+        title: 'Oba! Voc\u00ea est\u00e1 na lista! \ud83c\udf89',
+        html: '<div style="font-size:1.05rem;line-height:1.7;color:#555">' +
+              'Vamos te avisar em <strong>' + email + '</strong><br>' +
+              'assim que o <strong>FazEncarte.com</strong> estiver no ar!' +
+              '</div>',
+        confirmButtonText: 'Mal posso esperar! \ud83d\ude80',
+        confirmButtonColor: '#E8363A',
+        background: '#fff',
+        showClass: {
+          popup: 'swal2-show',
+          backdrop: 'swal2-backdrop-show'
+        },
+        customClass: {
+          title: 'swal-title-custom',
+          confirmButton: 'swal-btn-custom'
+        }
+      });
+
+      return false;
+    }
+  </script>
+</body>
+</html>
