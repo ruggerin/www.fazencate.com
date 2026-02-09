@@ -62,7 +62,7 @@
           'Gerente de conta dedicado',
           'Treinamento personalizado'
         ],
-        cta: { label: 'Falar com Especialista', url: 'em-breve.html', style: 'outline' }
+        cta: { label: 'Falar com Especialista', url: 'contato.html', style: 'outline' }
       }
     ]);
   }
