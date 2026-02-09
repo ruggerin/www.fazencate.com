@@ -25,7 +25,7 @@
           'Download em PDF',
           "Marca d'água discreta"
         ],
-        cta: { label: 'Começar Grátis', url: 'em-breve.html', style: 'outline' }
+        cta: { label: 'Começar Grátis', url: 'em-breve', style: 'outline' }
       },
       {
         name: 'Premium',
@@ -43,7 +43,7 @@
           'Temas personalizados',
           'Suporte prioritário'
         ],
-        cta: { label: 'Assinar Agora', url: 'em-breve.html', style: 'filled' }
+        cta: { label: 'Assinar Agora', url: 'em-breve', style: 'filled' }
       },
       {
         name: 'Empresarial',
@@ -62,7 +62,7 @@
           'Gerente de conta dedicado',
           'Treinamento personalizado'
         ],
-        cta: { label: 'Falar com Especialista', url: 'contato.html', style: 'outline' }
+        cta: { label: 'Falar com Especialista', url: 'contato', style: 'outline' }
       }
     ]);
   }
